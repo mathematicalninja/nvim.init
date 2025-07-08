@@ -1,0 +1,1 @@
+/home/quirk/.local/share/nvim/mason/packages/ruff/venv/bin/python -m pip --disable-pip-version-check install --no-user --ignore-installed ruff==0.12.
