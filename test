@@ -1,0 +1,24 @@
+There is some issue I can't sort out here, the register is copying a bunch of the text.
+
+idk, I'll figure it out another time.
+
+
+require("Quirk.settings.mouse")
+
+ Escape
+ Enter
+
+yi"o<Ctrl-[>p<Enter>a<CR><Esc>/\.<Enter>xi<CR><Esc>/\.<Enter>xi<CR><Esc>
+
+0"iy$
+@i
+yi"op0/\.ix/\.ix
+
+0"oy$
+@o
+0v$"Cyk0v$"Byk0v$"Ayd1jD"Ap"Bp"Cp
+
+require("Quirk.settings.mouse")
+
+
+

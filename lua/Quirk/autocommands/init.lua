@@ -1,3 +1,4 @@
+print("Quirk.autocommands")
 -- [[ Basic Autocommands ]]
 --
 --  See `:help lua-guide-autocommands`

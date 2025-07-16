@@ -1,34 +1,8 @@
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
-
--- Clear highlights on search when pressing <Esc> in normal mode
---  See `:help hlsearch`
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
-
--- Diagnostic keymaps
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
-
--- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
--- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
--- is not what someone will guess without a bit more experience.
---
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
-
--- Remapped mouse for faster navigation.
+-- Remapped arrows for faster navigation.
 vim.keymap.set("n", "<left>", "b", { desc = "move Left by word" })
 vim.keymap.set("n", "<right>", "w", { desc = "move Right by word" })
 vim.keymap.set("n", "<up>", "k_", { desc = "move Up to start of code line" })
 vim.keymap.set("n", "<down>", "j_", { desc = "move Down to start of code line" })
--- vim.keymap.set("n", "reqf", "<leader>f:wq<Enter>")
--- 	require("conform").format({ async = true, lsp_format = "fallback" })
--- end)
--- vim.keymap.set("n", "<C-s>", "ff:wq")
--- Terminal zoom for Ubuntu
--- vim.keymap.set("n", "<C-+>", "<C-S-+>")
--- FIXME:
--- vim.keymap.set("n", "+", "<C-=>")
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -44,3 +18,17 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 -- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
 -- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
 -- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+
+-- vim.keymap.set("n", "<C-S-j>", ":m '>+1<CR>gv=gv")
+-- vim.keymap.set("n", "<C-S-k>", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- merge this line, and keep cursor in nice place
+vim.keymap.set("n", "J", "mzJ`z")
+-- half page jumps, with centering.
+vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz")
+-- next (n)/ previous (N) serach result, center the line (zz) and show line highlight (zv)
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
