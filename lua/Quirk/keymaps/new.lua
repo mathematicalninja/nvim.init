@@ -2,7 +2,12 @@
 vim.g.mapleader = " "
 
 -- idk
-vim.api.nvim_set_keymap("n", "<leader>tf", "<Plug>PlenaryTestFile", { noremap = false, silent = false })
+--vim.api.nvim_set_keymap(
+--	"n",
+--	"<leader>pf",
+--	"<Plug>PlenaryTestFile",
+--	{ desc = "[p]lenary test [f]ile", noremap = false, silent = false }
+--)
 
 -- TODO: look into specifics.
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>")

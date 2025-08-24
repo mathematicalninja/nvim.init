@@ -1,3 +1,21 @@
+TODO: add in a "switch to light mode"
+TODO: make lua's unused functions have coloured bodies
+--- @diagnostic disable-next-line: unused-function
+====> make it toggleable? 
+
+TODO: while in "i" mode, autocomplete menu is oppening. STOP this.
+TODO: sway <leader>f to be <leader><leader>, allowing <leader>f to be "[f]loating .."
+GLOBAL DEFAULTS
+                                          *grr* *gra* *grn* *gri* *grt* *i_CTRL-S*
+These GLOBAL keymaps are created unconditionally when Nvim starts:
+- "grn" is mapped in Normal mode to |vim.lsp.buf.rename()|
+- "gra" is mapped in Normal and Visual mode to |vim.lsp.buf.code_action()|
+- "grr" is mapped in Normal mode to |vim.lsp.buf.references()|
+- "gri" is mapped in Normal mode to |vim.lsp.buf.implementation()|
+- "grt" is mapped in Normal mode to |vim.lsp.buf.type_definition()|
+- "gO" is mapped in Normal mode to |vim.lsp.buf.document_symbol()|
+- CTRL-S is mapped in Insert mode to |vim.lsp.buf.signature_help()|
+
 :source nvimNote.vim
 :mksession nvimNote.vim
 
@@ -149,11 +167,6 @@ on a "(" it will move to the matching ")".  If it's on a ")" it will move to
 the matching "(".
 
 
-
-
-
-
-
 			    %
 			 <----->
 		if (a == (b * c) / d) ~
@@ -223,17 +236,6 @@ When using blockwise selection, you have four corners.  "o" only takes you to
 one of the other corners, diagonally.  Use "O" to move to the other corner in
 the same line.
 
-
-If you have selected some text in Visual mode, and discover that you need to
-change the other end of the selection, use the "o" command (Hint: o for other
-end).  The cursor will go to the other end, and you can move the cursor to
-change where the selection starts.  Pressing "o" again brings you back to the
-other end.
-
-When using blockwise selection, you have four corners.  "o" only takes you to
-one of the other corners, diagonally.  Use "O" to move to the other corner in
-the same line.
-
 Just put the cursor on the e of "teh"
 and execute the command "xp".  
 
@@ -278,7 +280,7 @@ This is required.  If you would have put it before the "w" command, it would
 not have worked.
 
 
-Should make a keymap for map(n,<leader>d, "dd) so <space>d works like d but yanks into the "d register.
+Should make a keymap for map(n,<leader>d, "_d) so <space>d works like d but yanks into the "_ register.
 
 Idea: set up a "snip to ideas.txt"
 APPENDING TO A FILE
@@ -509,10 +511,7 @@ CTRL-L
 
 
 
-Add a command for map(n, SOMETHING-R, <C-w><S-r><C-w>1000<<C-w>80>) and a similar command for L
-
-
-
+TODO: Add a command for map(n, SOMETHING-R, <C-w><S-r><C-w>1000<<C-w>80>) and a similar command for L
 
 
 Search and replace:
@@ -546,13 +545,7 @@ starting Vim slower) you use a maximum of 500 lines: >
 
 	:set shada='1000,f1,<500
 
-
-
-
-cheat sheet curl command
-
-
-
+TODO: cheat sheet curl command
 
 :lcd
 local working directory changes it for just that window
@@ -567,12 +560,12 @@ local working directory changes it for just that window
 	use ":bwipe".  Also see the 'buflisted' option.
 
 
-on vim open, fullscreen
+TODO: on vim open, fullscreen
 
-Look into dynamic xxd for byte file manipulation.
+TODO: Look into dynamic xxd for byte file manipulation.
 
-consider map(i, <S-Right>, <End>)
-consider map(i, <L-Right>, <Home>)
+TODO: consider map(i, <S-Right>, <End>)
+TODO: consider map(i, <S-Left>, <Home>)
 
 insert mode:
 CTRL-O		execute one command, return to Insert mode   *i_CTRL-O*
@@ -583,7 +576,7 @@ CTRL-\ CTRL-O	like CTRL-O but don't move the cursor	     *i_CTRL-\_CTRL-O*
 Vim can automatically complete words on insertion.  You type the first part of
 a word, press CTRL-P, and Vim guesses the rest.
 
-consider map(i, <Tab>, <C-P>)
+TODO: consider map(i, <Tab>, <C-P>)
 
 If you now type CTRL-P Vim will search again for a word that completes the
 word before the cursor.  Since there is nothing in front of the cursor, it
@@ -622,7 +615,7 @@ of alternatives, which are the items that "struct foo" contains.  That is
 quite different from using CTRL-P, which would complete any word, while only
 members of "struct foo" are valid here.
 
-maybe map(i, <Tab>, <C-X><C-O>)
+TODO: maybe map(i, <Tab>, <C-X><C-O>)
 
 If you press CTRL-A, the editor inserts the text you typed the last time you
 were in Insert mode.
@@ -645,7 +638,7 @@ Note:
 	That's abbreviating the abbreviate command!
 
 
-show tab characters
+TODO: show tab characters
 
 The CTRL-V command is used to insert the next character literally.  You can also use the command CTRL-V {digits} to insert a character with the
 decimal number {digits}.  
@@ -702,8 +695,7 @@ a long line, this means moving a lot of screen lines at once.
    To move only one screen line, use the "gj" and "gk" commands.  When a line
 doesn't wrap they do the same as "j" and "k".  When the line does wrap, they
 move to a character displayed one line below or above.
-   You might like to use these mappings, which bind these movement commands to
-the cursor keys: >
+TODO: You might like to use these mappings, which bind these movement commands to the cursor keys: 
 
 
 If you want to import text into a program like MS-Word, each paragraph should
@@ -712,39 +704,24 @@ lines, this is how you turn each paragraph into a single line: >
 
 	:g/./,/^$/join
 
+TODO: add in a way to set specific colour schemes for "auto" mksession 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-add in a way to set specific colour schemes for "auto" mksession 
-
-
-vim.opt.spellcapcheck ==> "sentence endings"
+TODO: vim.opt.spellcapcheck ==> "sentence endings"
 
 when a number is selected, <C-A> increments it.
 
-e.g. here: 26
+e.g. here: 2
 
 The CTRL-X command does subtraction in a similar way.
 
 The behavior of CTRL-A and CTRL-X depends on the value of |'nrformats'|. For
 example, if you use: >
 
-Idea: test if "alpha" in nrformats allows "one"-->"two"
+TODO: test if "alpha" in nrformats allows "one"-->"two"
 
 TODO: insert mode save.
-map("i", <C-s>, <C-o><cmd>w</cmd>)
+TODO: map("i", <C-s>, <C-o><cmd>w</cmd>)
 
 
 
@@ -779,7 +756,7 @@ there, you must tell Vim to read text instead.  This is done by passing the
 "-" argument in place of a file.  Example: >
 
 
-map("n", <leader>p, ```"_dP']_```)
+TODO: map("n", <leader>p, ```"_dP']```)
 
 
 NORMAL MODE SCRIPTS
@@ -810,9 +787,6 @@ can just continue and remember to edit the script later.
    The "-w" argument appends to an existing script.  That is good when you
 want to record the script bit by bit.  If you want to start from scratch and
 start all over, use the "-W" argument.  It overwrites any existing file.
-
-
-
 
 
 If you want to ignore case for one specific pattern, you can do this by
@@ -901,21 +875,209 @@ This matches "for" in "forever".  It will not match "fortuin", for example.
 range:
 	/[a-z]
 
+	  [^"]	  any character that is not a double quote
+
+
+	item	matches			equivalent ~
+	\d	digit			[0-9]
+	\D	non-digit		[^0-9]
+	\x	hex digit		[0-9a-fA-F]
+	\X	non-hex digit		[^0-9a-fA-F]
+	\s	white space		[ 	]     (<Tab> and <Space>)
+	\S	non-white characters	[^ 	]     (not <Tab> and <Space>)
+	\l	lowercase alpha		[a-z]
+	\L	non-lowercase alpha	[^a-z]
+	\u	uppercase alpha		[A-Z]
+	\U	non-uppercase alpha	[^A-Z]
+
+	Note:
+	Using these predefined ranges works a lot faster than the character
+	range it stands for.
+	These items can not be used inside [].  Thus "[\d\l]" does NOT work to
+	match a digit or lowercase alpha.  Use "\(\d\|\l\)" instead.
+
+The character classes are:
+
+	item	matches				option ~
+	\i	identifier characters		'isident'
+	\I	like \i, excluding digits
+	\k	keyword characters		'iskeyword'
+	\K	like \k, excluding digits
+	\p	printable characters		'isprint'
+	\P	like \p, excluding digits
+	\f	file name characters		'isfname'
+	\F	like \f, excluding digits
+
+
+To check for a line break in a specific place, use the "\n" item: >
+
+	/one\ntwo
+
+This will match at a line that ends in "one" and the next line starts with
+"two".  To match "one two" as well, you need to match a space or a line
+break.  The item to use for it is "\_s": >
+
+	/one\_stwo
+
+To allow any amount of white space: >
+
+	/one\_s\+two
+
+
+"\s" matches white space, "\_s" matches white space or a line break.
+Similarly, "\a" matches an alphabetic character, and "\_a" matches an
+alphabetic character or a line break.  The other character classes and ranges
+can be modified in the same way by inserting a "_".
+
+	/"\_[^"]*"
+
+This finds a text in double quotes that may be split up in several lines.
+
+In C programs (and many other computer languages) an identifier starts with a
+letter and further consists of letters and digits.  Underscores can be used
+too.  This can be found with: >
+
+	/\<\h\w*\>
+
+"\<" and "\>" are used to find only whole words.  "\h" stands for "[A-Za-z_]"
+and "\w" for "[0-9A-Za-z_]".
+
+	Note:
+	"\<" and "\>" depend on the 'iskeyword' option.  If it includes "-",
+	for example, then "ident-" is not matched.  In this situation use: >
+
+		/\w\@<!\h\w*\w\@!
+<
+	This checks if "\w" does not match before or after the identifier.
+	See |/\@<!| and |/\@!|.
+
+
+	zf	f-old creation
+	zo	o-pen a fold
+	zc	c-lose a fold
+    zr  r-educe folding by 1 layer
+	zR  R-ecursivly unfold
+	zm  m-ore folding
+	zM  M-ore folding recursive
+
+
+To open all folds at the cursor line use |zO|.
+To close all folds at the cursor line use |zC|.
+To delete a fold at the cursor line use |zd|.
+To delete all folds at the cursor line use |zD|.
+
+
+You can quickly disable the folding with the |zn| command.  Then |zN| brings
+back the folding as it was.  |zi| toggles between the two.  This is a useful
+way of working:
+- create folds to get overview on your file
+- move around to where you want to do your work
+- do |zi| to look at the text and edit it
+- do |zi| again to go back to moving around
+
+
+More about manual folding in the reference manual: |fold-manual|
+
+
+	:set foldcolumn=1
+
+
+You can make folds close automatically when you move out of it: >
+
+	:set foldclose=all
+
+
+sets folds, but doesn't fold them.
+    
+	:set foldmethod=indent
+
+Then you can use the |zm| and |zr| commands to fold more and reduce folding.
+It's easy to see on this example text:
+
+This line is not indented
+	This line is indented once
+		This line is indented twice
+		This line is indented twice
+	This line is indented once
+This line is not indented
+	This line is indented once
+	This line is indented once
+
+Note that the relation between the amount of indent and the fold depth depends
+on the 'shiftwidth' option.  Each 'shiftwidth' worth of indent adds one to the
+depth of the fold.  This is called a fold level.
+
+TODO: may need to add an onBufEnter
+
+TODO: could do foldlevel on enter, by filetype so functions are folded.
+
+When you use the |zr| and |zm| commands you actually increase or decrease the
+'foldlevel' option.  You could also set it directly: >
+
+	:set foldlevel=3
 
 
 
+When you abandon a file (starting to edit another one), the state of the folds
+is lost.  If you come back to the same file later, all manually opened and
+closed folds are back to their default.  When folds have been created
+manually, all folds are gone!  To save the folds use the |:mkview| command: >
+
+	:mkview
+
+This will store the settings and other things that influence the view on the
+file.  You can change what is stored with the 'viewoptions' option.
+When you come back to the same file later, you can load the view again: >
+
+	:loadview
+
+You can store up to ten views on one file.  For example, to save the current
+setup as the third view and load the second view: >
+
+	:mkview 3
+	:loadview 2
+
+Note that when you insert or delete lines the views might become invalid.
+Also check out the 'viewdir' option, which specifies where the views are
+stored.  You might want to delete old views now and then.
+
+
+More about folding with markers in the reference manual: |fold-marker|
+Try it: >
+
+	:set foldmethod=marker
+
+Example text, as it could appear in a C program: >
+
+	/* foobar () {{{ */
+	int foobar()
+	{
+		/* return a value {{{ */
+		return 42;
+		/* }}} */
+	}
+	/* }}} */
+
+
+More about folding by syntax in the reference manual: |fold-syntax|
+
+*28.9*	Folding unchanged lines
+
+This is useful when you set the 'diff' option in the same window.  The
+|-d| option does this for you.  Example: >
+
+	:setlocal diff foldmethod=diff scrollbind nowrap foldlevel=1
+
+Do this in every window that shows a different version of the same file.  You
+will clearly see the differences between the files, while the text that didn't
+change is folded.
+
+For more details see |fold-diff|.
 
 
 
-
-
-
-
-
-
-
-
-
+TODO: on v split, :set ts=2
+TODO: on v unsplit, :set ts&
 
 TODO: create an "auto git" command:
 git add .
@@ -923,6 +1085,764 @@ git commit -m "Autocommit"
 git push -origin
 
 
+   To generate the tags file for all C files in the current directory, use the
+following command: >
+
+	ctags *.c
+
+"ctags" is a separate program.  Most Unix systems already have it installed.
+If you do not have it yet, you can find Universal ctags at:
+	https://ctags.io
+
+Universal ctags is preferred, Exuberant ctags is no longer being developed.
+
+
+   To open a preview window to display the function "write_char": >
+
+	:ptag write_char
+
+Vim will open a window, and jumps to the tag "write_char".  Then it takes you
+back to the original position.  Thus you can continue typing without the need
+to use a CTRL-W command.
+   If the name of a function appears in the text, you can get its definition
+in the preview window with: >
+
+	CTRL-W }
+
+There is a script that automatically displays the text where the word under
+the cursor was defined.  See |CursorHold-example|.
+
+
+TODO: look into :pclose, and see if a mapping to "q" makes sense
+To close the preview window use this command: >
+
+	:pclose
+
+To edit a specific file in the preview window, use ":pedit".  This can be
+useful to edit a header file, for example: >
+
+	:pedit defs.h
+
+
+
+To move about in code "chunks" use "[" followed by the relevant code identifier.
+
+
+
+TODO: check the following
+You can also use "[ CTRL-I", since CTRL-I is the same as pressing <Tab>.
+
+TODO: swapping from "move by line" to "move by half page"
+TODO: map("n", <C-..><up>, <C-U>)
+TODO: map("n", <C-..><down>, <C-D>)
+
+
+for compiled languages
+:set makeprg=PROGRAMNAME\ -o\ OPTION
+You can include special Vim keywords in the command specification.  The %
+character expands to the name of the current file.  
+
+This is not too useful, so you will refine the command a little and use the :r
+(root) modifier: >
+
+	:set makeprg=make\ %:r:S.o
+
+Now the command executed is as follows: >
+
+	make main.o
+
+More about these modifiers here: |filename-modifiers|.
+
+
+TODO: :set cindent shiftwidth=4
+
+There are
+different styles, however; so if you want to, you can customize the
+indentation style with the 'cinoptions' option.
+   
+There are many of these items.  See |cinoptions-values|.
+
+
+When you are using 'autoindent' or 'smartindent' to get the indent of the
+previous line, there will be many times when you need to add or remove one
+'shiftwidth' worth of indent.  A quick way to do this is using the CTRL-D and
+CTRL-T commands in Insert mode.
+
+A useful combination is: 
+
+	>i{  
+
+
+
+'tabstop' is set to eight by default.  Although you can change it, you quickly
+run into trouble later.  Other programs won't know what tabstop value you
+used.  They probably use the default value of eight, and your text suddenly
+looks very different.  Also, most printers use a fixed tabstop value of eight.
+Thus it's best to keep 'tabstop' alone.  (If you edit a file which was written
+with a different tabstop setting, see |25.3| for how to fix that.)
+handle this:
+
+TODO: expandtab vs tabstop
+Setting 'expandtab' does not affect any existing tabs.  In other words, any
+tabs in the document remain tabs.  If you want to convert tabs to spaces, use
+the ":retab" command.  Use these commands: >
+
+	:set expandtab
+	:%retab
+
+	r	insert the star when typing <Enter> in Insert mode
+	o	insert the star when using "o" or "O" in Normal mode
+	c	break comment text according to 'textwidth'
+
+See |fo-table| for more flags.
+
+
+
+	:set comments=://
+
+The colon separates the flags of an item from the text by which the comment is
+recognized.  The general form of an item in 'comments' is:
+
+	{flags}:{text}
+Several of these items can be concatenated, separated by commas.  This
+allows recognizing different types of comments at the same time.  
+
+
+A C comment starts with "/*", has "*" in the middle and "*/" at the end.  The
+entry in 'comments' for this looks like this: >
+
+	:set comments=s1:/*,mb:*,ex:*/
+
+For more details see |format-comments|.
+
+
+TODO: map-which-keys and seeing if it has a telescope integration.
+   To decide which key or keys you use for mapping, see |map-which-keys|.
+
+
+The ":map" command can be followed by another command.  A | character
+separates the two commands.  This also means that a | character can't be used
+inside a map command.  To include one, use <Bar> (five characters).  Example:
+>
+	:map <F8> :write <Bar> !checkin %:S<CR>
+
+
+
+TODO: map yap etc, to mark current location, then reset position after execution.
+
+
+ADDITIONALLY...
+
+The <script> keyword can be used to make a mapping local to a script.  See
+|:map-<script>|.
+
+The <buffer> keyword can be used to make a mapping local to a specific buffer.
+See |:map-<buffer>|
+
+The <unique> keyword can be used to make defining a new mapping fail when it
+already exists.  Otherwise a new mapping simply overwrites the old one.  See
+|:map-<unique>|.
+
+To make a key do nothing, map it to <Nop> (five characters).  This will make
+the <F7> key do nothing at all: >
+
+	:map <F7> <Nop>| map! <F7> <Nop>
+
+There must be no space after <Nop>.
+
+
+TODO: map [[ to [[zz maybe to [[zt
+TODO: map ]] to ]]zz
+
+To define a command, use the ":command" command, as follows: >
+Note:
+User-defined commands must start with a capital letter.  You cannot
+use ":Next".  The underscore cannot be used!  You can use digits, but
+this is discouraged.
+
+User-defined commands can take a series of arguments.  The number of arguments
+must be specified by the -nargs option.  
+
+
+	-nargs=0	No arguments
+	-nargs=1	One argument
+	-nargs=*	Any number of arguments
+	-nargs=?	Zero or one argument
+	-nargs=+	One or more arguments
+
+
+Some commands take a range as their argument.  To tell Vim that you are
+defining such a command, you need to specify a -range option.  The values for
+this option are as follows:
+
+	-range		Range is allowed; default is the current line.
+	-range=%	Range is allowed; default is the whole file.
+	-range={count}	Range is allowed; the last number in it is used as a
+			single number whose default is {count}.
+
+When a range is specified, the keywords <line1> and <line2> get the values of
+the first and last line in the range.  For example, the following command
+defines the SaveIt command, which writes out the specified range to the file
+"save_file": >
+
+	:command -range=% SaveIt :<line1>,<line2>write! save_file
+
+
+
+	-count={number}		The command can take a count whose default is
+				{number}.  The resulting count can be used
+				through the <count> keyword.
+	-bang			You can use a !.  If present, using <bang> will
+				result in a !.
+	-register		You can specify a register.  (The default is
+				the unnamed register.)
+				The register specification is available as
+				<reg> (a.k.a. <register>).
+	-complete={type}	Type of command-line completion used.  See
+				|:command-completion| for the list of possible
+				values.
+	-bar			The command can be followed by | and another
+				command, or " and a comment.
+	-buffer			The command is only available for the current
+				buffer.
+
+
+Finally, you have the <lt> keyword.  It stands for the character <.  Use this
+to escape the special meaning of the <> items mentioned.
+
+
+
+
+TODO: See |autocmd-events| for a complete list of events.
+
+
+The list can be very long, especially when filetype detection is used.  To
+list only part of the commands, specify the group, event and/or pattern.  For
+example, to list all BufNewFile autocommands: >
+
+	:autocmd BufNewFile
+
+
+
+To list all autocommands for the pattern "*.c": >
+
+	:autocmd * *.c
+
+
+NESTING
+
+Generally, commands executed as the result of an autocommand event will not
+trigger any new events.  If you read a file in response to a FileChangedShell
+event, it will not trigger the autocommands that would set the syntax, for
+example.  To make the events triggered, add the "++nested" flag: >
+
+	:autocmd FileChangedShell * ++nested  edit
+
+
+It is possible to trigger an autocommand by pretending an event has occurred.
+This is useful to have one autocommand trigger another one.  Example: >
+
+	:autocmd BufReadPost *.new  execute "doautocmd BufReadPost " . expand("<afile>:r")
+
+This defines an autocommand that is triggered when a new file has been edited.
+The file name must end in ".new".  The ":execute" command uses expression
+evaluation to form a new command and execute it.  When editing the file
+"tryout.c.new" the executed command will be: >
+
+	:doautocmd BufReadPost tryout.c
+
+The expand() function takes the "<afile>" argument, which stands for the file
+name the autocommand was executed for, and takes the root of the file name
+with ":r".
+
+":doautocmd" executes on the current buffer.  The ":doautoall" command works
+like "doautocmd" except it executes on all the buffers.
+
+
+
+The commands executed by an autocommand are Command-line commands.  If you
+want to use a Normal mode command, the ":normal" command can be used.
+Example: >
+
+	:autocmd BufReadPost *.log normal G
+
+This will make the cursor jump to the last line of `*.log` files when you start
+to edit it.
+
+
+	:let i = 1
+	:while i < 5
+	:  echo "count is" i
+	:  let i += 1
+	:endwhile
+<
+	Note:
+	The ":" characters are not really needed here.  You only need to use
+	them when you type a command.  In a Vim script file they can be left
+	out.  We will use them here anyway to make clear these are colon
+	commands and make them stand out from Normal mode commands.
+	Note:
+	You can try out the examples by yanking the lines from the text here
+	and executing them with :@"
+
+A variable name consists of ASCII letters, digits and the underscore.  It cannot start with a digit.
+
+
+  To see a list of currently defined variables
+use this command: 
+	:let
+
+You can use global variables everywhere.  This also means that when the
+variable "count" is used in one script file, it might also be used in another
+file.  This leads to confusion at least, and real problems at worst.  To avoid
+this, you can use a variable local to a script file by prepending "s:".  For
+example, one script contains this code: >
+
+	:let s:count = 1
+	:while s:count < 5
+	:  source other.vim
+	:  let s:count += 1
+	:endwhile
+
+Since "s:count" is local to this script, you can be sure that sourcing the
+"other.vim" script will not change this variable.
+
+        b:name		variable local to a buffer
+        w:name		variable local to a window
+        g:name		global variable (also in a function)
+        v:name		variable predefined by Vim
+
+
+
+:unlet s:count
+
+This deletes the script-local variable "s:count" to free up the memory it
+uses.  If you are not sure if the variable exists, and don't want an error
+message when it doesn't, append !: >
+
+	:unlet! s:count
+
+
+When a script has been processed to the end, the local variables declared
+there will not be deleted.  Functions defined in the script can use them.
+
+Example:
+
+	:if !exists("s:call_count")
+	:  let s:call_count = 0
+	:endif
+	:let s:call_count = s:call_count + 1
+	:echo "called" s:call_count "times"
+
+The "exists()" function checks if a variable has already been defined.  Its
+argument is the name of the variable you want to check.  Not the variable
+itself!  If you would do this: >
+
+
+Note:
+	Vim automatically converts a string to a number when it is looking for
+	a number.  When using a string that doesn't start with a digit the
+	resulting number is zero.  Thus look out for this: >
+		:if "true"
+<	The "true" will be interpreted as a zero, thus as false!
+
+
+Inside a single-quote string all the characters are as they are.  Only the single quote itself is special: you need to use two to get one.  A backslash is taken literally, thus you can't use it to change the meaning of the
+character after it.
+   
+
+   See |expr-quote| for the full list of special items in a string.
+
+
+Vim has a rich, yet simple way to handle expressions.  You can read the
+definition here: |expression-syntax|.  Here we will show the most common
+items.
+Other basic items in an expression are:
+
+	$NAME		environment variable
+	&name		option
+	@r		register
+
+
+The &name form can be used to save an option value, set it to a new value,
+do something and restore the old value.  Example: >
+
+	:let save_ic = &ic
+	:set noic
+	:/The Start/,$delete
+	:let &ic = save_ic
+
+TODO: add in a "paste and go to end" 
+TODO: map(n, ????, p'])
+
+
+Strings can be concatenated with ".." (see |expr6|).  Example:
+	:echo "foo" .. "bar"
+
+
+   A useful example for your vimrc file is checking the 'term' option and
+doing something depending upon its value: >
+
+	:if &term == "xterm"
+	:  " Do stuff for xterm
+	:elseif &term == "vt100"
+	:  " Do stuff for a vt100 terminal
+	:else
+	:  " Do something for other terminals
+	:endif
+
+The logic operators work both for numbers and strings.  When comparing two
+strings, the mathematical difference is used.  This compares byte values,
+which may not be right for some languages.
+   When comparing a string with a number, the string is first converted to a
+number.  This is a bit tricky, because when a string doesn't look like a
+number, the number zero is used.  Example: >
+
+	:if 0 == "one"
+	:  echo "yes"
+	:endif
+
+
+
+For strings there are two more items:
+
+	a =~ b		matches with
+	a !~ b		does not match with
+
+The left item "a" is used as a string.  The right item "b" is used as a
+pattern, like what's used for searching.
+
+The 'ignorecase' option is used when comparing strings.  When you don't want
+that, append "#" to match case and "?" 
+
+
+The ":execute" command can only execute colon commands.  The ":normal" command
+executes Normal mode commands.  However, its argument is not an expression but
+the literal command characters.  Example: >
+
+
+Vim defines many functions and provides a large amount of functionality that
+way.  A few examples will be given in this section.  You can find the whole
+list below: |function-list|.
+
+  Variables used inside a function
+are local unless prefixed by something like "g:", "a:", or "s:".
+
+When a function reaches ":endfunction" or ":return" is used without an
+argument, the function returns zero.
+
+
+TODO: IDEA: make the normal mode cursor magenta rather than inverted.
+TODO: remove whitespace on file save
+
+Sometimes it can be useful to have a variable point to one function or
+another.  You can do it with the function() function.  It turns the name of a
+function into a reference: >
+
+
+   The way to invoke a function that a variable refers to is with the call()
+function.  Its first argument is the function reference, the second argument
+is a List with arguments.
+
+More information about defining your own functions here: |user-function|.
+
+
+
+You can add items to a List with the add() function: >
+List concatenation is done with +: >
+
+Or, if you want to extend a List directly: >
+	:call extend(alist, ['two', 'three'])
+
+Notice that the first item of the List that range() produces is zero, thus the
+last item is one less than the length of the list.
+    You can also specify the maximum value, the stride and even go backwards:  
+
+	:for a in range(8, 4, -2)
+
+
+More information about exception handling can be found in the reference
+manual: |exception-handling|.
+
+
+==============================================================================
+*41.10*	Various remarks
+
+Here is a summary of items that apply to Vim scripts.  They are also mentioned
+elsewhere, but form a nice checklist.
+
+==============================================================================
+
+BUG:
+:mksession name.vim
+creates Session.vim in ~/
+so in ./ the command
+:source Session.vim
+errorreturn Ts
+
+FIX:
+this was because in the session that was saved, pwd was ~/
+
+
+
+:setlocal fileformat=unix
+
+
+
+re: vim scripts:
+Leading whitespace characters (blanks and TABs) are ignored, except when using
+|:let-heredoc| without "trim". Trailing whitespace is often ignored, but not always. One command that includes it is `map`.    A generic solution is to never use trailing white space, unless you really need it.
+
+
+The character " (the double quote mark) starts a comment.  There is a little "catch" with comments for some commands.  
+
+To spot these problems, you can set the 'list' option when editing vimrc
+files.
+
+
+
+TODO: remove trailing whitespace on save
+
+
+COMMENTS
+
+The character " (the double quote mark) starts a comment.  Everything after
+and including this character until the end-of-line is considered a comment and
+is ignored, except for commands that don't consider comments, as shown in
+examples below.  A comment can start on any character position on the line.
+
+There is a little "catch" with comments for some commands.  Examples: >
+
+	:abbrev dev development		" shorthand
+	:map <F3> o#include		" insert include
+	:execute cmd			" do it
+	:!ls *.c			" list C files
+
+
+PACKAGING
+Vim defines many functions and provides a large amount of functionality that
+way.  A few examples will be given in this section.  You can find the whole
+list below: |function-list|.
+
+  Variables used inside a function
+are local unless prefixed by something like "g:", "a:", or "s:".
+
+When a function reaches ":endfunction" or ":return" is used without an
+argument, the function returns zero.
+
+
+IDEA: make the normal mode cursor magenta rather than inverted.
+
+
+Sometimes it can be useful to have a variable point to one function or
+another.  You can do it with the function() function.  It turns the name of a
+function into a reference: >
+
+
+   The way to invoke a function that a variable refers to is with the call()
+function.  Its first argument is the function reference, the second argument
+is a List with arguments.
+
+More information about defining your own functions here: |user-function|.
+
+
+
+You can add items to a List with the add() function: >
+List concatenation is done with +: >
+
+Or, if you want to extend a List directly: >
+	:call extend(alist, ['two', 'three'])
+
+Notice that the first item of the List that range() produces is zero, thus the
+last item is one less than the length of the list.
+    You can also specify the maximum value, the stride and even go backwards:  
+
+	:for a in range(8, 4, -2)
+
+
+More information about exception handling can be found in the reference
+manual: |exception-handling|.
+
+
+==============================================================================
+*41.10*	Various remarks
+
+Here is a summary of items that apply to Vim scripts.  They are also mentioned
+elsewhere, but form a nice checklist.
+
+==============================================================================
+
+BUG:
+:mksession name.vim
+creates Session.vim in ~/
+so in ./ the command
+:source Session.vim
+errorreturn Ts
+
+FIX:
+this was because in the session that was saved, pwd was ~/
+
+
+
+:setlocal fileformat=unix
+
+
+
+re: vim scripts:
+Leading whitespace characters (blanks and TABs) are ignored, except when using
+|:let-heredoc| without "trim". Trailing whitespace is often ignored, but not always. One command that includes it is `map`.    A generic solution is to never use trailing white space, unless you really need it.
+
+
+The character " (the double quote mark) starts a comment.  There is a little "catch" with comments for some commands.  
+
+To spot these problems, you can set the 'list' option when editing vimrc
+files.
+
+
+
+TODO: remove trailing whitespace on save
+TODO: remove trailing lines on save
+
+TODO: floating "scratch" window
+TODO: https://learnxinyminutes/files/learn{filename}.{filetype}
+
+TODO: create a selector to view/clear registers.
+
+============  Wednesday 6th of August 2025
+DISABLING DEFAULTS                                      *lsp-defaults-disable*
+You can remove GLOBAL keymaps at any time using |vim.keymap.del()| or
+|:unmap|. See also |gr-default|.
+
+To remove or override BUFFER-LOCAL defaults, define a |LspAttach| handler:
+
+    vim.api.nvim_create_autocmd('LspAttach', {
+      callback = function(args)
+        -- Unset 'formatexpr'
+        vim.bo[args.buf].formatexpr = nil
+        -- Unset 'omnifunc'
+        vim.bo[args.buf].omnifunc = nil
+        -- Unmap K
+        vim.keymap.del('n', 'K', { buffer = args.buf })
+      end,
+    })
+
+To see the capabilities for a given server, try this in a LSP-enabled buffer: >vim
+
+    :lua =vim.lsp.get_clients()[1].server_capabilities
+
+TODO: map s-k/s-j in "n" to lsp, then remap c-k/c-j to move window
+
+
+- Q: How to force-reload LSP?
+- A: Stop all clients, then reload the buffer. >vim
+     :lua vim.lsp.stop_client(vim.lsp.get_clients())
+     :edit
+
+TODO: borders on popups and menus
+
+
+TODO: vim.lsp.buf.rename
+TODO: vim.lsp.buf.code_action
+
+:lua vim.print(vim.tbl_keys(vim.lsp.handlers))
+- 'callHierarchy/incomingCalls'
+- 'callHierarchy/outgoingCalls'
+- 'client/registerCapability'
+- 'client/unregisterCapability'
+- 'signature_help'
+- 'textDocument/codeLens'
+- 'textDocument/completion'
+- 'textDocument/diagnostic'
+- 'textDocument/documentHighlight'
+- 'textDocument/documentSymbol'
+- 'textDocument/formatting'
+- 'textDocument/hover'
+- 'textDocument/inlayHint'
+- 'textDocument/publishDiagnostics'
+- 'textDocument/rangeFormatting'
+- 'textDocument/rename'
+- 'textDocument/signatureHelp'
+- 'typeHierarchy/subtypes'
+- 'typeHierarchy/supertypes'
+- 'window/logMessage'
+- 'window/showDocument'
+- 'window/showMessage'
+- 'window/showMessageRequest'
+- 'window/workDoneProgress/create'
+- 'workspace/applyEdit'
+- 'workspace/configuration'
+- 'workspace/executeCommand'
+- 'workspace/inlayHint/refresh'
+- 'workspace/semanticTokens/refresh'
+- 'workspace/symbol'
+- 'workspace/workspaceFolders'
+
+TODO: if vim.wo.modifiable=false --> remove gitsign column
+
+
+The LSP client adds one or more highlights for each token. The highlight
+groups are derived from the token's type and modifiers:
+  • `@lsp.type.<type>.<ft>` for the type
+  • `@lsp.mod.<mod>.<ft>` for each modifier
+  • `@lsp.typemod.<type>.<mod>.<ft>` for each modifier
+Use |:Inspect| to view the highlights for a specific token. Use |:hi| or
+|nvim_set_hl()| to change the appearance of semantic highlights: >vim
+
+    hi @lsp.type.function guifg=Yellow        " function names are yellow
+    hi @lsp.type.variable.lua guifg=Green     " variables in lua are green
+    hi @lsp.mod.deprecated gui=strikethrough  " deprecated is crossed out
+    hi @lsp.typemod.function.async guifg=Blue " async functions are blue
+<
+
+
+
+
+
+
+TODO: Colours!
+You probably want these inside a |ColorScheme| autocommand.
+
+Use |LspTokenUpdate| and |vim.lsp.semantic_tokens.highlight_token()| for more
+complex highlighting.
+
+The following is a list of standard captures used in queries for Nvim,
+highlighted according to the current colorscheme (use |:Inspect| on one to see
+the exact definition):
+
+@lsp.type.class          Identifiers that declare or reference a class type
+@lsp.type.comment        Tokens that represent a comment
+@lsp.type.decorator      Identifiers that declare or reference decorators and annotations
+@lsp.type.enum           Identifiers that declare or reference an enumeration type
+@lsp.type.enumMember     Identifiers that declare or reference an enumeration property, constant, or member
+@lsp.type.event          Identifiers that declare an event property
+@lsp.type.function       Identifiers that declare a function
+@lsp.type.interface      Identifiers that declare or reference an interface type
+@lsp.type.keyword        Tokens that represent a language keyword
+@lsp.type.macro          Identifiers that declare a macro
+@lsp.type.method         Identifiers that declare a member function or method
+@lsp.type.modifier       Tokens that represent a modifier
+@lsp.type.namespace      Identifiers that declare or reference a namespace, module, or package
+@lsp.type.number         Tokens that represent a number literal
+@lsp.type.operator       Tokens that represent an operator
+@lsp.type.parameter      Identifiers that declare or reference a function or method parameters
+@lsp.type.property       Identifiers that declare or reference a member property, member field, or member variable
+@lsp.type.regexp         Tokens that represent a regular expression literal
+@lsp.type.string         Tokens that represent a string literal
+@lsp.type.struct         Identifiers that declare or reference a struct type
+@lsp.type.type           Identifiers that declare or reference a type that is not covered above
+@lsp.type.typeParameter  Identifiers that declare or reference a type parameter
+@lsp.type.variable       Identifiers that declare or reference a local or global variable
+
+@lsp.mod.abstract        Types and member functions that are abstract
+@lsp.mod.async           Functions that are marked async
+@lsp.mod.declaration     Declarations of symbols
+@lsp.mod.defaultLibrary  Symbols that are part of the standard library
+@lsp.mod.definition      Definitions of symbols, for example, in header files
+@lsp.mod.deprecated      Symbols that should no longer be used
+@lsp.mod.documentation   Occurrences of symbols in documentation
+@lsp.mod.modification    Variable references where the variable is assigned to
+@lsp.mod.readonly        Readonly variables and member fields (constants)
+@lsp.mod.static          Class members (static members)
 
 
 
@@ -930,11 +1850,34 @@ git push -origin
 
 
 
+LspAttach                                                          *LspAttach*
+    After an LSP client performs "initialize" and attaches to a buffer. The
+    |autocmd-pattern| is the buffer name. The client ID is passed in the
+    Lua handler |event-data| argument.
+
+    Example: >lua
+    vim.api.nvim_create_autocmd('LspAttach', {
+      callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        -- ...
+      end
+    })
+<
+    Note: If the LSP server performs dynamic registration, capabilities may be
+    registered any time _after_ LspAttach. In that case you may want to handle
+    the "registerCapability" event.
 
 
 
 
 
 
+TODO: noremap("n", "d", '"_d',{desc = "void deleting")
+TODO: noremap("n", "<leader>d", 'd',{desc = "non-void deleting")
 
 
+TODO: <leader> k/j for hover/signature_help, leaves <S-j> free for line-joining.
+
+========== Monday 11th of August 2025 | (2025-08-11)
+TODO: make light mode variant of colour scheme.
+TODO: make light mode variant of Different "brightnesses" 

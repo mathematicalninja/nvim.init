@@ -7,7 +7,8 @@ require("Quirk.settings.visual")
 require("Quirk.settings.saving")
 require("Quirk.settings.statusBar")
 require("Quirk.settings.searching")
-require("Quirk.settings.quick")
+--require("Quirk.settings.move")
+require("Quirk.settings.misc")
 
 -- NOTE: vim.o.[---] and vim.opt.[---] are largely similar, the latter (opt) allowing tables for setting values, and single value settings being shared between both.
 
@@ -17,7 +18,9 @@ require("Quirk.settings.quick")
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
--- BUG:
+--[[
+    NOTE: xclip or similar may need to be installed.
+--]]
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
 end)

@@ -2,6 +2,7 @@
 vim.keymap.set("x", "<leader>p", [["_dP]])
 -- void delete
 vim.keymap.set({ "n", "v" }, "<leader>d", '"_d')
+vim.keymap.set({ "n", "v" }, "<leader>D", '"_D')
 
 -- yank to clipboard
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
@@ -10,10 +11,29 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 -- sets mark a (ma) formats (=) around paragraph (ap) moves back to mark a ('a) rather than leaving cursor at top of paragraph.
 vim.keymap.set("n", "=ap", "ma=ap'a")
 
--- project view
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
+-- project view ==> Oil handles this now
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- for fun
 -- vim.keymap.set("n", "<leader>ca", function()
 -- 	require("cellular-automaton").start_animation("make_it_rain")
 -- end)
+
+-- insert mode save.
+vim.keymap.set({ "n", "i" }, "<C-s>", "<CMD>w<CR>")
+
+-- lua sorcing to avoid accidental `:sp`
+vim.keymap.set("n", "<leader><leader>s", "<CMD>so<CR>", { desc = "lua [s]orcing to avoid accidental `:sp`" })
+
+--
+vim.keymap.set("n", "<leader>k", function()
+    vim.diagnostic.open_float()
+end, { desc = "look up[k] at diagnostics" })
+
+--TODO: pipe spellfix somewhere else.
+vim.keymap.set("n", "<leader>j", "z=", { desc = "correct word under[j] cursor" })
+
+-- fed up of "s" in the middle of a messed up key combination deleting things.
+-- And I don't need an abbreviation for a 2 letter code.
+vim.keymap.set("n", "s", "<nop>", { desc = "remove cl alias" })
+vim.keymap.set("n", "S", "<nop>", { desc = "remove cc alias" })

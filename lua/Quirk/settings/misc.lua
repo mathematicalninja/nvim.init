@@ -12,4 +12,9 @@ vim.opt.spell = true
 -- "autoselect" to always put selected text on the clipboard
 -- set cb=unnamedplus
 -- <Tab> ==> spaces in insert mode.
+--vim.opt.clipboard = "unnamedplus"
+
 vim.opt.expandtab = true
+
+vim.o.digraph = false
+--pcall(vim.keymap.del, "i", "<C-k>") -- overkill just in caset

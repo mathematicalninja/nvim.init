@@ -6,5 +6,5 @@ vim.o.undofile = true
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
--- Decrease update time
-vim.o.updatetime = 150
+-- Change update time
+vim.o.updatetime = 450
