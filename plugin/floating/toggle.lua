@@ -3,8 +3,6 @@ local Toggle = {}
 
 --- @param Float Float
 function Toggle.scratch(Float)
-    print("Toggle.scratch(Float)")
-    print(Float.state)
     Toggle.float(Float, { style = "scratch", bufwin = Float.state.buffers["scratch"] })
 end
 
@@ -64,7 +62,6 @@ function Toggle.command_line(Float)
         make a "mini" version of floating window
         resize, reposition, experiment.
     --]]
-    print("floating command line")
     Toggle({ style = "command", bufwin = Float.state.buffers.terminal })
 end
 
@@ -79,7 +76,6 @@ vim.keymap.set("n", "<leader><leader>c", "<CMD>FloatCommand<CR>", { desc = "floa
 --- @param opts toggleOpts
 --- @return bufwin
 function Toggle.float(Float, opts)
-    print("Toggle.float(Float, opts)")
     -- TODO: on win open, add to filled. BufWinEnter
     -- TODO: add in "move" action.
 
@@ -100,7 +96,7 @@ function Toggle.float(Float, opts)
         })
         bufwin = Float.apply.style(Float, {
             style = opts.style,
-            bufwin = opts.bufwin,
+            bufwin = bufwin,
             current_filetype = current_filetype,
             cur_buf = cur_buf,
         })

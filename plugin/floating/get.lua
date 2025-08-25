@@ -17,10 +17,8 @@ function get.next_free_position(Float)
     -- if true then
     -- return { top = true, right = true }
     -- end
-    print("get.next_free_position(Float)")
 
     local count = #Float.state.position.windowList
-    print("count", count)
 
     if count == 0 then
         return { top = true, right = true }

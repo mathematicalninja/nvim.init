@@ -61,9 +61,6 @@ end
 function position.reposition_window(Float, bufwin, width_height)
     -- BUG: this should loop over all windows.
 
-    print("reposition")
-    print(#Float.state.position.windowList)
-
     local is_top_right = Float.get.next_free_position(Float)
 
     local win_pos = Float.calculate.corners(is_top_right)

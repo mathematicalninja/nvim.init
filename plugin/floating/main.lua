@@ -14,7 +14,6 @@ local Float = {
 --{{{ config and state
 
 function Float:pop_window()
-    print("pop")
     table.remove(self.state.position.windowList, 1)
     -- if #state_position.windowList > 0 then
     -- reposition_windows()
@@ -32,7 +31,6 @@ end
 --- @param opts floatOpts
 --- @return bufwin
 function Float.open_float(opts)
-    print("open_float")
     -- if valid, use existing buf, else make new one.
     local buf = Float.check.buf(opts.bufwin).buf
 
@@ -55,7 +53,6 @@ end
 vim.api.nvim_create_user_command( --
     "FloatScratch",
     function()
-        print("usrCmd")
         Float.toggle.scratch(Float)
     end,
     {}
