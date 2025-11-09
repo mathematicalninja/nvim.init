@@ -14,11 +14,18 @@ return {
     lazy = false,
     keys = {
         {
-            "<leader>pv",
+            "<leader>oo",
             function()
                 require("oil").open()
             end,
-            desc = "[p]roject [v]iew",
+            desc = "[o]pen [o]il",
+        },
+        {
+            "<leader><leader>o",
+            function()
+                require("oil").open()
+            end,
+            desc = "[o]pen [o]il",
         },
     },
 }

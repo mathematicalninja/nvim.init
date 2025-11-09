@@ -1,3 +1,4 @@
+-- 3 places have LANGUAGE ADDITION mrked on them.
 local root_files = {
     ".git",
 }
@@ -38,6 +39,7 @@ return {
         -- - The `ensure_installed` list works with mason-lspconfig to resolve LSP names like "lua_ls".
         "WhoIsSethDaniel/mason-tool-installer.nvim",
 
+        "folke/trouble.nvim",
         {
             -- `lazydev` configures Lua LSP for your Neovim config, runtime and plugins
             -- used for completion, annotations and signatures of Neovim apis
@@ -74,8 +76,8 @@ return {
 
         --
 
-        "L3MON4D3/LuaSnip",
-        "saadparwaiz1/cmp_luasnip",
+        -- "L3MON4D3/LuaSnip",
+        --        "saadparwaiz1/cmp_luasnip",
 
         -- Comment Highlighting.
         {
@@ -134,6 +136,33 @@ return {
                     end,
                     { desc = "[f]ormat buffer" }
                 )
+                vim.keymap.set( --
+                    "i",
+                    "<C-f>",
+                    function()
+                        require("conform").format({
+                            async = true,
+                            lsp_format = "fallback",
+                            bufnr = 0, -- current buffer is bufnr 0
+                        })
+                    end,
+                    { desc = "[f]ormat buffer" }
+                )
+                --[[ doesn't format correctly.
+                vim.keymap.del("i", "<C-f>")
+                vim.keymap.set( --
+                    "i",
+                    "<C-f>",
+                    function()
+                        require("conform").format({
+                            async = true,
+                            lsp_format = "fallback",
+                            bufnr = 0, -- current buffer is bufnr 0
+                        })
+                    end,
+                    { desc = "[f]ormat buffer" }
+                )
+                -- ]]
                 -- Execute a code action, usually your cursor needs to be on top of an error
                 -- or a suggestion from your LSP for this to activate.
                 vim.keymap.set(
@@ -302,6 +331,8 @@ return {
                 -- NOTE:Formatters may not share names with LSP clients.
                 python = { "ruff_format" },
                 lua = { "stylua" },
+                c = { "clang-format" },
+                zig = { "zigfmt" },
             },
             -- Conform can also run multiple formatters sequentially
             -- python = { "isort", "black" },
@@ -313,6 +344,7 @@ return {
                 stylua = {
                     prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" },
                 },
+                ["clang-format"] = { prepend_args = { "-i", "--style=Google" } },
             },
             notify_on_error = false,
             format_on_save = function(bufnr)
@@ -342,23 +374,45 @@ return {
 
         local servers = {
             -- LANGUAGE ADDITION HERE!
+            zls = {},
             ruff = {},
-            pylsp = {
+            -- pylsp = {
+            --     settings = {
+            --         pylsp = {
+            --             plugins = {
+            --                 pyflakes = { enabled = false },
+            --                 pycodestyle = { enabled = false },
+            --                 autopep8 = { enabled = false },
+            --                 yapf = { enabled = false },
+            --                 mccabe = { enabled = false },
+            --                 pylsp_mypy = { enabled = false },
+            --                 pylsp_black = { enabled = false },
+            --                 pylsp_isort = { enabled = false },
+            --             },
+            --         },
+            --     },
+            -- },
+            basedpyright = {
                 settings = {
-                    pylsp = {
-                        plugins = {
-                            pyflakes = { enabled = false },
-                            pycodestyle = { enabled = false },
-                            autopep8 = { enabled = false },
-                            yapf = { enabled = false },
-                            mccabe = { enabled = false },
-                            pylsp_mypy = { enabled = false },
-                            pylsp_black = { enabled = false },
-                            pylsp_isort = { enabled = false },
+                    basedpyright = {
+                        -- BUG:
+                        -- remove inline hints
+                        pythonPath = vim.fn.system("which python"):gsub("%s+", ""), -- fails on windows systems with spaces in the name.
+
+                        -- disableOrganizeImports = true,
+
+                        analysis = {
+                            -- autoImportCompletions = true,
+                            autoSearchPaths = true,
+                            useLibraryCodeForTypes = true,
+                            typeCheckingMode = "strict",
+                            diagnosticMode = "workspace",
+                            autoFormatStrings = true,
                         },
                     },
                 },
             },
+
             lua_ls = {
                 settings = {
                     Lua = {
@@ -372,6 +426,7 @@ return {
                         },
                         diagnostics = {
                             globals = { "vim" },
+                            disable = { "unused-function" },
                             --	disable = { "missing-fields" },
                         },
                         format = {
@@ -387,13 +442,13 @@ return {
             tinymist = {
                 settings = {
                     typst = {
-
                         formatterMode = "typstyle",
                         exportPdf = "onType",
                         semanticTokens = "disable",
                     },
                 },
             },
+            marksman = {},
         }
 
         -- Ensure the servers and tools above are installed
@@ -430,10 +485,10 @@ return {
 
         cmp.setup({
             sources = cmp.config.sources({
-                { name = "nvim_lsp" },
-                { name = "luasnip" },
-                { name = "buffer" },
                 { name = "blink" },
+                { name = "nvim_lsp" },
+                --                { name = "luasnip" },
+                { name = "buffer" },
             }),
             mapping = {},
             --            experimental = {

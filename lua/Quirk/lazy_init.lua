@@ -1,4 +1,4 @@
-print("Quirk.lazy_init -- here be lazy's ui cusomisation.")
+-- print("Quirk.lazy_init -- here be lazy's ui cusomisation.")
 -- [[ install `lazy.nvim` plugin manager ]]
 --    see `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -26,6 +26,9 @@ require("lazy").setup({
     -- loads my plugins from "~/.config/nvim/lua/Quirk/lazy/"
     spec = "Quirk.lazy",
     change_detection = { notify = false },
+    git = {
+        url_format = "git@github.com:%s.git",
+    },
     {
         install = {
             -- install missing plugins on startup. This doesn't increase startup time.

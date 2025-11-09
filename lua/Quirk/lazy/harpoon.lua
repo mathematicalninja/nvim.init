@@ -60,6 +60,14 @@ return {
             { desc = "harpoon select 4" } -- uses 4th key on left index
         )
 
+        vim.keymap.set(
+            "n",
+            "<leader>q",
+            function()
+                harpoon:list():select(5)
+            end,
+            { desc = "harpoon select 5" } -- uses 4th key on left index
+        )
         -- Toggle previous & next buffers stored within Harpoon list
         vim.keymap.set( --
             "n",

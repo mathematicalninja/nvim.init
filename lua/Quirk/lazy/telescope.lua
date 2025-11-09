@@ -57,7 +57,11 @@ return { -- Fuzzy Finder (files, lsp, etc)
                 --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
                 --   },
             },
-            -- pickers = {}
+            pickers = {
+                buffers = { initial_mode = "normal" },
+                grep_string = { initial_mode = "normal" },
+                resume = { initial_mode = "normal" },
+            },
             extensions = {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown(),
@@ -70,14 +74,18 @@ return { -- Fuzzy Finder (files, lsp, etc)
 
         -- See `:help telescope.builtin`
         local builtin = require("telescope.builtin")
+
+        -- enter in "n" mode
+        vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[s]earch current [w]ord" })
+        vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[s]earch [r]esume" })
+
         vim.keymap.set("n", "<leader>sh", builtin.help_tags, { desc = "[s]earch [h]elp" })
+        -- TODO: only_show_current_mode == false
         vim.keymap.set("n", "<leader>sk", builtin.keymaps, { desc = "[s]earch [k]eymaps" })
         vim.keymap.set("n", "<leader>sf", builtin.find_files, { desc = "[s]earch [f]iles" })
         vim.keymap.set("n", "<leader>ss", builtin.builtin, { desc = "[s]earch [s]elect Telescope" })
-        vim.keymap.set("n", "<leader>sw", builtin.grep_string, { desc = "[s]earch current [w]ord" })
         vim.keymap.set("n", "<leader>sg", builtin.live_grep, { desc = "[s]earch by [g]rep" })
         vim.keymap.set("n", "<leader>sd", builtin.diagnostics, { desc = "[s]earch [d]iagnostics" })
-        vim.keymap.set("n", "<leader>sr", builtin.resume, { desc = "[s]earch [r]esume" })
         vim.keymap.set("n", "<leader>s.", builtin.oldfiles, { desc = '[s]earch Recent Files ("." for repeat)' })
         vim.keymap.set("n", "<leader>ss", builtin.buffers, { desc = "[s]earch exi[s]ting buffers" })
 

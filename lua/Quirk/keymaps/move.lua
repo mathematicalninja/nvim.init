@@ -1,8 +1,8 @@
 -- Remapped arrows for faster navigation.
 vim.keymap.set("n", "<left>", "b", { desc = "move Left by word" })
 vim.keymap.set("n", "<right>", "w", { desc = "move Right by word" })
-vim.keymap.set("n", "<up>", "k_", { desc = "move Up to start of code line" })
-vim.keymap.set("n", "<down>", "j_", { desc = "move Down to start of code line" })
+vim.keymap.set("n", "<up>", "-", { desc = "move Up to start of code line" })
+vim.keymap.set("n", "<down>", "+", { desc = "move Down to start of code line" })
 
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
@@ -28,8 +28,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 -- merge this line, and keep cursor in nice place
 vim.keymap.set("n", "J", "mzJ`z")
 -- half page jumps, with centering.
-vim.keymap.set("n", "<C-d>", "<C-d>zz", {desc = "[d]own half page, centered."} )
-vim.keymap.set("n", "<C-u>", "<C-u>zz", {desc = "[u]p half page, centered."} )
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "[d]own half page, centered." })
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "[u]p half page, centered." })
 -- next (n)/ previous (N) serach result, center the line (zz) and show line if folded (zv)
-vim.keymap.set("n", "n", "nzzzv", {desc = "[n]ext result, centered, unfolded."} )
-vim.keymap.set("n", "N", "Nzzzv", {desc = "¬[N]ext result, centered, unfolded."} )
+vim.keymap.set("n", "n", "nzzzv", { desc = "[n]ext result, centered, unfolded." })
+vim.keymap.set("n", "N", "Nzzzv", { desc = "¬[N]ext result, centered, unfolded." })

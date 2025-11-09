@@ -1,10 +1,38 @@
+TODO: basedpyright, configure better:
+https://docs.basedpyright.com/latest/benefits-over-pyright/new-diagnostic-rules/
+
+TODO: markdown lsp --> https://github.com/artempyanykh/marksman
+
+TODO: markdown render --> https://github.com/MeanderingProgrammer/render-markdown.nvim
+NOTE: should be toggleable.
+
+TODO: markdown links: https://github.com/jghauser/follow-md-links.nvim
+TODO: pandoc --> convert URL to .md, something something, read in terminal.
+TODO: add in a "language cheatsheet" to floating.
+TODO: pokemon in terminal --> https://github.com/acxz/pokescript
+IDEA: `Lilypond` ==> music notation program. --> https://wiki.archlinux.org/title/MIDI
+TODO: remove "highlight on hover"
+TODO: map("n", "<Esc><Esc>", remove **all** highlights) -- This makes no sense I think. But worth a try.
+TODO: spellcheck ==> "add to good words" and "remove from good words" and "inspect local good words in a new buffer"
+
+TODO: <C-Q> ==> :bd
+
+TODO: .md file: "add row to table" command. Something about yank line above, replace non-"|" characters with " " then paste
+TODO: kitty view pdfs, to allow LaTeX/Typst refreshes.
+TODO: set a 10 minute timer for "you've had this file in an open window for 10 mins without saving"
+TODO: prevent kitty from taking <C-z> / <C-S-w> as killswitch.
+        change to "zf%"
+TODO: swap <C-S-k> and <C-S-j> in Harpoon's auto-nav
+
 TODO: add in a "switch to light mode"
+TODO: add in a "remove transparency"
 TODO: make lua's unused functions have coloured bodies
 --- @diagnostic disable-next-line: unused-function
 ====> make it toggleable? 
 
-TODO: while in "i" mode, autocomplete menu is oppening. STOP this.
-TODO: sway <leader>f to be <leader><leader>, allowing <leader>f to be "[f]loating .."
+TODO: while in "i" mode, autocomplete menu is opening. STOP this.
+TODO: swap <leader>f to be <leader><leader>, allowing <leader>f to be "[f]loating .."
+IDEA: <leader>t for [t]oggle instead.
 GLOBAL DEFAULTS
                                           *grr* *gra* *grn* *gri* *grt* *i_CTRL-S*
 These GLOBAL keymaps are created unconditionally when Nvim starts:

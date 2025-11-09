@@ -1,14 +1,10 @@
-print("Quirk.keymaps")
+-- print("Quirk.keymaps")
 require("Quirk.keymaps.basic")
 require("Quirk.keymaps.move")
 require("Quirk.keymaps.behaviour")
 
 -- Bug: want this to integrate properly.
 -- vim.keymap.set("x", "<C-Enter>","<nop>", {desc = "No Operation on Crtl Enter, to allow cmp to take over."
-
-
-
-
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`

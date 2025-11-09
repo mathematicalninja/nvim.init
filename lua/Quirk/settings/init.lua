@@ -9,6 +9,8 @@ require("Quirk.settings.statusBar")
 require("Quirk.settings.searching")
 --require("Quirk.settings.move")
 require("Quirk.settings.misc")
+require("Quirk.settings.folding")
+require("Quirk.settings.python")
 
 -- NOTE: vim.o.[---] and vim.opt.[---] are largely similar, the latter (opt) allowing tables for setting values, and single value settings being shared between both.
 
@@ -22,11 +24,11 @@ require("Quirk.settings.misc")
     NOTE: xclip or similar may need to be installed.
 --]]
 vim.schedule(function()
-	vim.o.clipboard = "unnamedplus"
+    vim.o.clipboard = "unnamedplus"
 end)
 
--- Decrease mapped sequence wait time
-vim.o.timeoutlen = 300
+-- Increased mapped sequence wait time
+vim.o.timeoutlen = 1000
 
 -- Configure how new splits should be opened
 vim.o.splitright = true

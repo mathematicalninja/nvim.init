@@ -17,4 +17,11 @@ vim.opt.spell = true
 vim.opt.expandtab = true
 
 vim.o.digraph = false
---pcall(vim.keymap.del, "i", "<C-k>") -- overkill just in caset
+-- pcall(vim.keymap.del, "i", "<C-k>") -- overkill just in case
+vim.keymap.set( --
+    "i",
+    "<M-C-S-D-Space>",
+    function()
+        -- SOME function that calls digraphs
+    end
+)

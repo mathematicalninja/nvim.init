@@ -1,3 +1,0 @@
-print("Quirk.lsp ==> autocommands")
-
-
