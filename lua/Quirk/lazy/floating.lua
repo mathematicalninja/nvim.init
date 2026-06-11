@@ -1,24 +1,30 @@
+--map(n, <l><l>t , toggle.openfile(./TODO.md)
 --IDEA: have "v" mode yank, open scratch, put. Then "n" mode can use toggle_hide. Both on the same keymap.
 return {
     "mathematicalninja/floating.nvim",
+    dir = "~/Code/nvim/floating",
     config = function()
         local opts = {
             dev = false,
             positions = {
-                clock_mid = function()
+                --{{{ clock_cursor
+                clock_cursor = function()
                     --- @module "floating"
 
                     --- @alias position_abrv
-                    --- | "clock_mid"
+                    --- | "clock_cursor"
 
                     --- @type Setup_Opts
                     ---@type config_and_position
                     local R = {}
 
-                    local col = math.floor(vim.o.columns / 2) - 3
-                    local row = math.floor(vim.o.lines / 2) - 1
+                    -- local col = math.floor(vim.o.columns / 2) - 3
+                    -- local row = math.floor(vim.o.lines / 2) - 1
 
-                    R.pos = "clock_mid"
+                    local row = -1
+                    local col = 0
+
+                    R.pos = "clock_cursor"
                     R.name_location = "footer"
                     R.config = {
                         width = 5,
@@ -28,25 +34,26 @@ return {
                         anchor = "NW",
                         title = "",
                         title_pos = "center",
-                        relative = "editor",
+                        relative = "cursor",
                         style = "minimal", -- No extra UI elements, e.g. status bar.
-                        border = { "╔", " ", "╗", " ", "╝", " ", "╚", " " },
+                        border = { "╔", " ", "╗", " ", "╝", " ", "╚", "█" },
                     }
 
                     return R
-                end,
+                end, --}}}
             },
             styles = {
-                clock_mid = {
+                --{{{ clock_cursor
+                clock_cursor = {
                     --- @alias style_name
-                    --- | "clock_mid"
+                    --- | "clock_cursor"
 
-                    name = "clock_mid",
-                    positions = { "clock_mid" },
+                    name = "clock_cursor",
+                    positions = { "clock_cursor" },
                     dont_focus = true,
 
                     INIT = function(FLOAT)
-                        FLOAT.state.style_data.clock_tl = {}
+                        FLOAT.state.style_data.clock_cursor = {}
                     end,
 
                     setup = function(STATE)
@@ -83,7 +90,7 @@ return {
 
                         local time = hour_array[1] .. hour_array[2] .. ":" .. min_array[1] .. min_array[2]
 
-                        STATE.style_data.clock_tl = {
+                        STATE.style_data.clock_cursor = {
                             time = time,
                         }
                     end,
@@ -96,10 +103,34 @@ return {
                             0,
                             -1,
                             false,
-                            { opts.state.style_data.clock_tl.time }
+                            { opts.state.style_data.clock_cursor.time }
                         )
                     end,
                 },
+                --}}}
+                --{{{ terminal
+                terminal = {
+                    --- @alias style_name
+                    --- | "terminal"
+
+                    name = "terminal",
+                    positions = { "mc" },
+                    dont_focus = false,
+
+                    INIT = function(FLOAT)
+                        FLOAT.state.style_data.terminal = {}
+                    end,
+
+                    setup = function(STATE) end,
+
+                    -- `style` is run after the new window is opened.
+                    style = function(opts)
+                        vim.api.nvim_cmd({ cmd = "terminal" }, {})
+                        local enterPy = vim.api.nvim_replace_termcodes("ipython<CR>", true, false, true)
+                        vim.api.nvim_feedkeys(enterPy, "n", true)
+                    end,
+                },
+                --}}}
             },
             extras = { --
                 positions = { "clock_tl" },
@@ -111,7 +142,18 @@ return {
         local float = require("floating").setup(opts)
 
         vim.keymap.set("n", "<leader><leader>k", function()
-            float.toggle("clock_mid")
+            float.toggle("clock_cursor")
         end, {})
+
+        vim.keymap.set("n", "<leader><leader>i", function()
+            float.toggle("terminal", { pos = "tr" })
+        end, {})
+        vim.keymap.set("n", "<leader>fi", function()
+            float.toggle("terminal", { pos = "tr" })
+        end, {})
+
+        vim.keymap.set("n", "<leader>f<leader>f", function()
+            float.toggle_hide("default")
+        end, { desc = "hide for temp notes" })
     end,
 }

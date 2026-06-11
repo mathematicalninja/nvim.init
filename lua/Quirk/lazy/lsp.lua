@@ -1,13 +1,17 @@
--- 3 places have LANGUAGE ADDITION mrked on them.
+-- 3 places have LANGUAGE ADDITION mrked on them.lsplslsp
 local root_files = {
     ".git",
 }
 return {
+
     -- LSP Plugins
 
     -- Main LSP Configuration
     "neovim/nvim-lspconfig",
     dependencies = {
+        -- system agnostic path joining.
+        "mathematicalninja/pathjoin.nvim",
+
         -- Automatically install LSPs and related tools to stdpath for Neovim
         -- Mason must be loaded before its dependents so we need to set it up here.
         -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
@@ -126,7 +130,7 @@ return {
                 -- conform's formatter.
                 vim.keymap.set( --
                     "n",
-                    "<leader>f",
+                    "<leader><leader>f",
                     function()
                         require("conform").format({
                             async = true,
@@ -208,7 +212,7 @@ return {
                     { buffer = event.buf, desc = "LSP: " .. "[g]oto [d]efinition" }
                 )
 
-                -- WARN: This is not Goto Definition, this is Goto Declaration.
+                -- WARN: This is ***not*** Goto Definition, this is Goto Declaration.
                 --  For example, in C this would take you to the header.
                 vim.keymap.set(
                     "n",
@@ -294,19 +298,19 @@ return {
                 -- code, if the language server you are using supports them
                 --
                 -- This may be unwanted, since they displace some of your code
-                if
-                    client
-                    and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
-                then
-                    vim.keymap.set( --
-                        "n",
-                        "<leader>i",
-                        function()
-                            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
-                        end,
-                        { buffer = event.buf, desc = "LSP: " .. "toggle [i]nlay hints" }
-                    )
-                end
+                -- if
+                --     client
+                --     and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf)
+                -- then
+                --     vim.keymap.set( --
+                --         "n",
+                --         "<leader>i",
+                --         function()
+                --             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+                --         end,
+                --         { buffer = event.buf, desc = "LSP: " .. "toggle [i]nlay hints" }
+                --     )
+                -- end
             end,
         })
 
@@ -325,7 +329,6 @@ return {
         --]]
 
         require("conform").setup({
-
             formatters_by_ft = {
                 -- LANGUAGE ADDITION HERE!
                 -- NOTE:Formatters may not share names with LSP clients.
@@ -333,10 +336,26 @@ return {
                 lua = { "stylua" },
                 c = { "clang-format" },
                 zig = { "zigfmt" },
+                latex = { "tex-fmt" },
+                go = { "gofumpt" },
+                sql = { "sqlfluff" },
+
+                -- @see https://biomejs.dev/internals/language-support/
+                ["javascript"] = { "biome" },
+                ["javascriptreact"] = { "biome" },
+                ["typescript"] = { "biome" },
+                ["typescriptreact"] = { "biome" },
+                ["json"] = { "biome" },
+                -- ["jsonc"] = { "biome" },
+                ["vue"] = { "biome" },
+                ["css"] = { "biome" },
+                ["scss"] = { "biome" },
+                ["less"] = { "biome" },
+                ["html"] = { "biome" },
             },
             -- Conform can also run multiple formatters sequentially
             -- python = { "isort", "black" },
-            --
+
             -- You can use 'stop_after_first' to run the first available formatter from the list
             -- javascript = { "prettierd", "prettier", stop_after_first = true },
             formatters = {
@@ -345,6 +364,10 @@ return {
                     prepend_args = { "--indent-type", "Spaces", "--indent-width", "4" },
                 },
                 ["clang-format"] = { prepend_args = { "-i", "--style=Google" } },
+
+                ["tex-fmt"] = {
+                    append_args = { "--nowrap" },
+                },
             },
             notify_on_error = false,
             format_on_save = function(bufnr)
@@ -374,6 +397,64 @@ return {
 
         local servers = {
             -- LANGUAGE ADDITION HERE!
+            sqls = {
+                filetypes = { "sql" },
+            },
+            gopls = {
+                filetypes = { "go" },
+                settings = {
+                    gopls = {
+                        staticcheck = true,
+                    },
+                },
+            },
+
+            clangd = {
+                filetypes = { "c", "h" },
+            },
+            bashls = {
+                cmd = { "bash-language-server", "start" },
+                filetypes = { "bash", "sh" },
+            },
+            texlab = {
+                cmd = {
+                    require("pathjoin").join({ --
+                        vim.fn.stdpath("data"),
+                        "mason",
+                        "bin",
+                        "texlab",
+                    }),
+                },
+                filetypes = {
+                    "tex",
+                    "latex",
+                },
+
+                settings = {
+                    texlab = {
+                        -- disable wordwrap for bibtex
+                        formatterLineLength = 0,
+
+                        --- build args
+                        --- see [docs](https://github.com/latex-lsp/texlab/wiki/Configuration)
+                        build = {
+                            executable = "latexmk",
+                            args = {
+                                "-lualatex",
+                                "-interaction=nonstopmode",
+                                "-synctex=1",
+
+                                -- "%b.tex",
+                                "main.tex",
+                                -- "%f", -- Change this to a `get main file function or "%f"`
+                            },
+                            onSave = false,
+                            forwardSearchAfter = true,
+                        },
+                        bib,
+                    },
+                },
+            },
             zls = {},
             ruff = {},
             -- pylsp = {
@@ -408,6 +489,11 @@ return {
                             typeCheckingMode = "strict",
                             diagnosticMode = "workspace",
                             autoFormatStrings = true,
+                            inlayHints = {
+                                variableTypes = false,
+                                callArgumentNamesMatching = false,
+                                callArgumentNames = false,
+                            },
                         },
                     },
                 },
@@ -440,15 +526,33 @@ return {
                 },
             },
             tinymist = {
+                filetypes = { "typst" },
+                command = { "tinymist" },
                 settings = {
                     typst = {
                         formatterMode = "typstyle",
-                        exportPdf = "onType",
-                        semanticTokens = "disable",
+                        -- exportPdf = "onType",
+                        semanticTokens = "enable",
                     },
                 },
             },
             marksman = {},
+            biome = {
+                settings = {
+                    formatter = { --
+                        indentStyle = "space",
+                        indentWidth = 2,
+                        attributePosition = "multiline",
+                    },
+                    json = {
+                        formatter = {
+                            enabled = true,
+                            indentStyle = "space",
+                            indentWidth = 2,
+                        },
+                    },
+                },
+            },
         }
 
         -- Ensure the servers and tools above are installed
@@ -469,16 +573,22 @@ return {
             vim.lsp.config(server, cfg)
             vim.lsp.enable(server)
         end
-        --
-        --
-        --
-        --
-        --
-        --
-        --
-        --
-        --
-        --
+
+        -- ========== go import handling ==========
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = "*.go",
+            callback = function()
+                vim.lsp.buf.code_action({
+                    context = {
+                        only = { "source.organizeImports" },
+                        diagnostics = {},
+                    },
+                    apply = true,
+                })
+            end,
+        })
+        -- ========================================
+
         -- Disable the built-in insert-mode popup and leave only cmp’s menu
         vim.opt.completeopt = { "menu", "menuone", "noinsert", "noselect" }
         local cmp = require("cmp")
@@ -487,13 +597,16 @@ return {
             sources = cmp.config.sources({
                 { name = "blink" },
                 { name = "nvim_lsp" },
-                --                { name = "luasnip" },
+                -- { name = "luasnip" },
                 { name = "buffer" },
             }),
             mapping = {},
-            --            experimental = {
-            --                ghost_text = true,
-            --            },
+            -- experimental = {
+            --     ghost_text = true,
+            -- },
+            completion = {
+                autocomplete = false,
+            },
         })
 
         -- Only navigate if the popup is visible
@@ -533,7 +646,7 @@ return {
         -- Opens popup if it's not there , otherwise it's confirm.
         vim.keymap.set("i", "<C-l>", function()
             if cmp.visible() then
-                cmp.confirm({ select = true })
+                cmp.confirm({ select = false })
             else
                 cmp.complete()
             end
@@ -545,6 +658,28 @@ return {
                 cmp.abort()
             end
         end, { desc = "cmp: abort" })
+
+        --------------------LANGUAGE ADDITIONS------------------------
+        -----⇓ Go ⇓-----
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "go",
+            callback = function()
+                vim.keymap.set("n", "<leader><leader>e", function()
+                    vim.api.nvim_put({ --
+                        ------
+                        "if err != nil {",
+                        "return  err",
+                        "}",
+                        ------
+                    }, "l", true, true)
+                    vim.api.nvim_feedkeys("kk$hhhi", "n", false)
+                end, {
+                    buffer = true,
+                    silent = true,
+                })
+            end,
+        })
+        -----⇑ GO ⇑-----
     end,
 }
 --       local cmp = require("cmp")

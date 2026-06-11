@@ -1,0 +1,12 @@
+-- IDEA:
+-- This file shows the items needed to be provided to setup a language in my config 
+-- it will be imported in the file `lsp/import.lua` using the return dict from these language files.
+
+-- TODO:
+-- LSP inststall
+-- Formatter  (conform)
+-- auto-commands, e.g. :
+--      `LspAttach`
+--      `FileType`
+--      `BufWritePre`
+-- Language server configuration
